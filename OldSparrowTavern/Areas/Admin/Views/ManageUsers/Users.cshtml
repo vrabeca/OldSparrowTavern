@@ -1,0 +1,89 @@
+﻿@using OldSparrowTavern.Areas.Admin.ViewModels
+    @model IEnumerable<UserToEditViewModel>
+    @{
+        ViewBag.Title = "Users";
+    }
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.js">
+</script>
+<script type="text/javascript">
+    function show(ele)
+    {
+        document.getElementById(ele.value).style.display = "block";
+    }
+</script>
+@{ int counter = 0; }
+<h2 style="color:gold;">Application Users</h2>
+<div class="jumbotron" style="background-color:#222;border: 1px;border-color: #111; border-style:solid; height:860px">
+    <table>
+        <thead style="display: block;border: 1px solid green;">
+            <tr>
+                <th  style="padding-left:15px;color:gold;width:190px;font-size:large;text-align:left;">UserName</th>
+                <th  style="color:gold;width:115px;font-size:large;text-align:left">Gold</th>
+                <th  style="color:gold;width:75px;font-size:large;text-align:right">Level</th>
+                <th  style="color:gold;width:173px;font-size:large;text-align:right">Experience</th>
+                <th  style="padding-left:35px;color:gold;width:120px;font-size:large;text-align:right">UserRole</th>
+            </tr>
+        </thead>
+        <tbody style="display:block;border: 1px solid green; height: 700px; overflow-y: scroll">
+            
+                @foreach (var user in Model)
+                {
+                <tr style="border-bottom: 1px solid green;">
+                    <td >
+                            <button style="background-color:transparent;border-color:transparent; color:gold;font-size:25px;margin-left:10px; width:120px;height:50px;"  onclick="show(this)"  value="@counter">@user.UserName</button>
+                            @using (Ajax.BeginForm("EditUsername", "ManageUsers", new AjaxOptions { HttpMethod = "POST" }))
+                            {
+                                <input type="hidden" value="@user.UserName" name="userid" />
+                                <input type="text" id="@counter" name="username" style="display:none">
+                                <input type="submit" style="visibility: hidden;" />
+                            }
+                       @{counter++;}
+                    </td>
+                    <td >
+                            <button  style="background-color:transparent;border-color:transparent; color:gold;font-size:20px;margin-left:50px;width:90px;height:50px; color:gold" onclick="show(this)" value="@counter">@user.Gold</button>
+                            @using (Ajax.BeginForm("EditUserGold", "ManageUsers", new AjaxOptions { HttpMethod = "POST" }))
+                            {
+                                <input type="hidden" value="@user.UserName" name="userid" />
+                                <input  type="text" id="@counter" name="usergold" style="display:none">
+                                <input type="submit" style="visibility: hidden;" />
+                            }
+                        @{counter++;}
+                    </td>
+                    <td>
+                        <button style="background-color:transparent;border-color:transparent; color:gold;font-size:20px;margin-left:50px;width:80px;height:50px;" onclick="show(this)" value="@counter">@user.Level</button>
+                        @using (Ajax.BeginForm("EditUserLevel", "ManageUsers", new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            <input type="hidden" value="@user.UserName" name="userid" />
+                            <input type="text"  id="@counter" name="userlevel" style="display:none">
+                            <input type="submit" style="visibility: hidden;" />
+
+                        }
+                        @{counter++;}
+                    </td>
+                    <td>
+                        <button style="background-color:transparent;border-color:transparent; color:gold;font-size:20px;margin-left:50px;width:90px;height:50px;"   onclick="show(this)" value="@counter">@user.Experience</button>
+                        @using (Ajax.BeginForm("EditUserExperience", "ManageUsers", new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            <input type="hidden" value="@user.UserName" name="userid" />
+                            <input type="text"  id="@counter" name="userexperience" style="display:none">
+                            <input type="submit" style="visibility: hidden;" />
+
+                        }
+                        @{counter++;}
+                    </td>
+                    <td style="padding-right:15px;">
+                        <button style="background-color:transparent;border-color:transparent; color:gold;font-size:23px;margin-left:50px;width:110px;height:50px;" onclick="show(this)" value="@counter">@user.UserRole</button>
+                        @using (Ajax.BeginForm("EditUserRole", "ManageUsers", new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            <input type="hidden" value="@user.UserName" name="userid" />
+                            <input type="text" id="@counter" name="userrole" style="display:none">
+                            <input type="submit" style="visibility: hidden;" />
+
+                        }
+                        @{counter++;}
+                    </td>
+                </tr>
+                }
+            </tbody>
+    </table>
+</div>

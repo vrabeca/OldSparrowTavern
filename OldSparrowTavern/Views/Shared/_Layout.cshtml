@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @using OldSparrowTavern.HelperMethods
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/chat.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    @{
+        //Store the Controller and Action in the format : "Controller/Action" so it can easily be checked
+        string ctrName = String.Format("{0}/{1}", ViewContext.RouteData.Values["controller"], ViewContext.RouteData.Values["action"]);
+    }
+</head>
+<body>
+    <div class="navbar transparent navbar-inverse">
+        <div class="container">
+            <div class="navbar-inner">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (ctrName != "ChatRoom/Chat")
+                {
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img src='@Url.Content("~/Images/MenuElements/Logo.png")' />
+                    </a>
+                }
+                else
+                {
+                    <img src='@Url.Content("~/Images/MenuElements/Logo.png")' />
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated && User.IsInRole("User"))
+                    {
+                        if (ctrName == "ChatRoom/Chat")
+                        {
+
+                            <li>
+                                <p id="disabledLinks" style="padding:2px;margin-top:4px;color:darkred;font-family:Diploma;font-size:240%;cursor: default;">Profile</p>
+                            </li>
+                            <li>
+                                <p id="disabledLinks" style="padding:2px;margin-top:4px;color:darkred;font-family:Diploma;font-size:240%;cursor: default;">Shop</p>
+                            </li>
+                            <li>
+                                <p id="disabledLinks" style="padding:2px;margin-top:4px;color:darkred;font-family:Diploma;font-size:240%;cursor: default;">Chat</p>
+                            </li>
+                            <li>
+                                <p id="disabledLinks" style="padding:2px;margin-top:4px;color:darkred;font-family:Diploma;font-size:240%;cursor: default;">Contact</p>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                @if (ctrName == "Profile/Index")
+                                {
+                                    @Html.ActionLink("Profile", "Index", "Profile", null, new { @style = "color:darkred;font-family:Diploma;font-size:240%;" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Profile", "Index", "Profile", null, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                                }
+                            </li>
+                            <li>
+                                @if (ctrName == "Shop/Browse")
+                                {
+                                    @Html.ActionLink("Shop", "Browse", "Shop", null, new { @style = "color:darkred;font-family:Diploma;font-size:240%;" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Shop", "Browse", "Shop", null, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                                }
+                            </li>
+                            <li>
+                                @if (ctrName == "ChatRoom/Chat")
+                                {
+                                    <p style="padding:2px;margin-top:4px;color:darkred;font-family:Diploma;font-size:200%;cursor: default;">Chat</p>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Chat", "Chat", "ChatRoom", null, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                                }
+                            </li>
+                            <li>
+                                @if (ctrName == "Home/Contact")
+                                {
+                                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:darkred;font-family:Diploma;font-size:240%;" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                                }
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>
+                            @if (ctrName == "Home/Contact")
+                            {
+                                @Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:darkred;font-family:Diploma;font-size:240%;" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Contact", "Contact", "Home", null, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                            }
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="color:gold;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>f
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

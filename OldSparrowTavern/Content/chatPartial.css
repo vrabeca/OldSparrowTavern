@@ -1,0 +1,61 @@
+﻿@font-face{
+    font-family:metamorphous;
+    src:url(../fonts/Metamorphous-Regular.ttf);
+}
+#partialName{
+    font-family:metamorphous;
+    margin-left:-20px;
+    font-size:35px;
+    margin-top:-35px;
+    bottom:50px;
+    margin-bottom:60px;
+    text-align:center;
+    color:gold;
+}
+#partialLevel{
+        font-family:metamorphous;
+        margin-left:110px;
+
+        color:gold;
+
+}
+#partialExperience{
+        font-family:metamorphous;
+        margin-left:110px;
+        color:gold;
+
+}
+
+#partialGender {
+        font-family:metamorphous;
+        margin-left:110px;
+        color:gold;
+
+}
+#partialAvatars {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+#partialAvatarFrame {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top:-55px;
+  margin-bottom:-5px;
+  margin-left:65px;
+}
+#partialAvatar {
+  position: absolute;
+  top: 85px;
+  left: 64px;
+  width:252px;
+  height:372px;
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:15px;
+  border-top-left-radius:120px;
+  border-top-right-radius:120px;
+  margin-top:-37px;
+  margin-left:75px;
+
+}

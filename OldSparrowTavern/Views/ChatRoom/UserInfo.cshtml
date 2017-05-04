@@ -1,0 +1,14 @@
+﻿@model OldSparrowTavern.ViewModels.UserInfoViewModel
+
+@Styles.Render("~/Content/css/chatPartial.css")
+
+<h3 id="partialName">@Model.UserName</h3>
+<div id="partialAvatars">
+    <img id="partialAvatar" src="@Model.AvatarURL"/>
+    <img id="partialAvatarFrame" src="~/Images/MenuElements/secondFrame.png"/>
+</div>
+<h3 id="partialLevel">Level: @Model.Level</h3>
+<h3 id="partialGender">Gender: @Model.Gender</h3>
+<h3 id="partialExperience">Experience: @Model.Experience</h3>
+
+

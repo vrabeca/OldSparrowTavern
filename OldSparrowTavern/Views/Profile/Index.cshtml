@@ -1,0 +1,159 @@
+﻿@using OldSparrowTavern.ViewModels
+@model ProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+@Styles.Render("~/Content/css/Site.css")
+
+@section scripts{
+@Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+
+<script type="text/javascript">
+    $(function () {
+  $('.occupiedslot').each(function () {
+    // options
+    var distance = 10;
+    var time = 250;
+    var hideDelay = 500;
+
+    var hideDelayTimer = null;
+
+    // tracker
+    var beingShown = false;
+    var shown = false;
+
+    var trigger = $('.trigger', this);
+    var popup = $('.popup', this).css('opacity', 0);
+
+    // set the mouseover and mouseout on both element
+    $([trigger.get(0), popup.get(0)]).mouseover(function () {
+      // stops the hide event if we move from the trigger to the popup element
+      if (hideDelayTimer) clearTimeout(hideDelayTimer);
+
+      // don't trigger the animation again if we're being shown, or already visible
+      if (beingShown || shown) {
+        return;
+      } else {
+        beingShown = true;
+
+        // reset position of popup box
+        popup.css({
+          top: -100,
+          left: -33,
+          display: 'block' // brings the popup back in to view
+        })
+
+        // (we're using chaining on the popup) now animate it's opacity and position
+        .animate({
+          top: '-=' + distance + 'px',
+          opacity: 1
+        }, time, 'swing', function() {
+          // once the animation is complete, set the tracker variables
+          beingShown = false;
+          shown = true;
+        });
+      }
+    }).mouseout(function () {
+      // reset the timer if we get fired again - avoids double animations
+      if (hideDelayTimer) clearTimeout(hideDelayTimer);
+
+      // store the timer so that it can be cleared in the mouseover if required
+      hideDelayTimer = setTimeout(function () {
+        hideDelayTimer = null;
+        popup.animate({
+          top: '-=' + distance + 'px',
+          opacity: 0
+        }, time, 'swing', function () {
+          // once the animate is complete, set the tracker variables
+          shown = false;
+          // hide the popup entirely after the effect (opacity alone doesn't do the job)
+          popup.css('display', 'none');
+        });
+      }, hideDelay);
+    });
+  });
+    });
+    </script>
+}
+<div class="jumbotron" style="background-color:#222;border: 1px;
+border-color: #111; border-style:solid; height:860px" >
+    <div class="row">
+        <div class="col-sm-4" id="name"><h2 style="color:gold;">@Model.Username</h2></div>
+        <div class="col-sm-4" id="level"><h2 style="color:gold;">Level: @Model.Level</h2></div>
+        <div class="col-sm-4" id="experience">
+            <h2 style="color:gold;" id="experienceText">Experience: @Model.Experience/1000</h2>
+            <div id="progress" style= "width: 400px;border: 1px solid black;position: relative;padding:3px;">
+                <span id="percent" style="color:gold;position: absolute; left: 50%;">@(Model.Experience/10) %</span>
+                <div id="bar" style="height: 30px;background-color: green; width: @((Model.Experience/10)+"%");"></div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" >
+        <div class="col-sm-4" id="avatars">
+            <img class="avatar" src="@Model.AvatarURL" />
+            <img class="avatarFrame" src="~/Images/MenuElements/secondFrame.png" style="width:470px;height:530px"/>
+            
+            <br />
+            <br />
+
+            @using (Html.BeginForm("ChangeAvatar", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" id="file" class="inputfile" />
+                <label for="file"><strong>Choose new avatar</strong></label>
+                <input id="changeAvatar" type="submit" value="Change Avatar" />
+            }
+        </div>
+        <div class="col-sm-2" id="v-divider"></div>
+        <div class="col-sm-offset-6" >
+           <table class="table-bordered" id="inventoryLayout">
+           @{ var counter = 0;
+                for (int i = 0; i < Model.InventoryCapacity / 5; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < 5; j++)
+                        {
+                            if (Model.Items.Count>counter)
+                            {
+                                <td>
+                                    <div class="occupiedslot" id="occupiedSlot">
+                                        <img class ="trigger" src=@Model.Items.ElementAt(counter).PictureURL height="148" width="98"/>
+                                        <div class="popup">
+                                            <h2 id="itemName">@Model.Items.ElementAt(counter).Name</h2>
+                                            <hr style="width:190px;border-color:green" />
+                                            <p id="itemDescription">@Model.Items.ElementAt(counter).Description</p>
+                                            <hr style="width:190px;border-color:green" />
+                                            <p id="expGain">Experience gain: @Model.Items.ElementAt(counter).ExperienceGain</p>
+                                            @using (Ajax.BeginForm("Consume", "Profile", new AjaxOptions { HttpMethod = "POST" }))
+                                            {
+                                                <audio id="sound2" src="~/Images/Sounds/consumeItemSound.mp3" preload="auto"></audio>
+                                                <input type="hidden" name="itemid" value="@Model.Items.ElementAt(counter).ItemId" />
+                                                <input class="btn-lg btn-success" type="submit" value="Consume" onclick="document.getElementById('sound2').play(); this.value = 'Consuming..'; this.disabled = true;" />
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                                counter++;
+                            }
+                            else
+                            {
+                                <td>
+                                    <div class="emptySlot" id=emptySlot\@counter>
+                                        <img src='~/Images/MenuElements/emptyInventorySlot.jpg' height="150" width="100"/>
+                                    </div>
+                                </td>
+                                counter++;
+                            }
+                        }
+                    </tr>
+                }
+            }
+            </table>
+            <br/>
+            <div>
+                <h2 id="coins" style="color:gold">Coins: @Model.Gold <img src="~/Images/MenuElements/gold.png" width="45" height="45"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+

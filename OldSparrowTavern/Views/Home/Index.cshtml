@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+@if (!Request.IsAuthenticated)
+{
+    <div id="plakat" class="jumbotron">
+        <h3 style="color:gold;text-align:left">Welcome to the Old Sparrow Tavern traveller.</h3>
+        <h3 style="color:gold;">Register new account or log in with existing one.</h3>
+        <h3 style="color:gold;">Things you can do here after registrating:</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-8"><h4 style="color:gold;">Manage your profile, change your avatar, consume beverages and other substanses from which you gain experience and level</h4></div>
+            <div class="col-md-4"><img src="~/Images/MenuElements/profileDescription.png" style="width:300px;height:200px;" /></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4"><img src="~/Images/MenuElements/shopDescription.png" style="width:300px;height:200px;" /></div>
+            <div class="col-md-8"><h4 style="color:gold;">Buy beverages and other substanses from the shop keeper</h4></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8"><h4 style="color:gold;">Visit the chatroom to communicate about stuff with your friends, and also to view their profiles and keep track of their experience progress.</h4></div>
+            <div class="col-md-4"><img src="~/Images/MenuElements/chatDescription.png" style="width:300px;height:200px;" /></div>
+        </div>
+        </div>
+        }
+        else
+        {
+        <div id="plakat" class="jumbotron">
+            <h2 style="color:gold;text-align:left">Welcome @User.Identity.Name enjoy your stay at the Old Sparrow Tavern.</h2>
+            <h3 style="color:gold;">Things you can do here:</h3>
+            <hr />
+            <div class="row">
+                <div class="col-md-8"><h4 style="color:gold;">Manage your profile, change your avatar, consume beverages and other substanses from which you gain experience and level</h4></div>
+                <div class="col-md-4"><img src="~/Images/MenuElements/profileDescription.png" style="width:300px;height:200px;" /></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4"><img src="~/Images/MenuElements/shopDescription.png" style="width:300px;height:200px;" /></div>
+                <div class="col-md-8"><h4 style="color:gold;">Buy beverages and other substanses from the shop keeper</h4></div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-8"><h4 style="color:gold;">Visit the chatroom to communicate about stuff with your friends, and also to view their profiles and keep track of their experience progress.</h4></div>
+                <div class="col-md-4"><img src="~/Images/MenuElements/chatDescription.png" style="width:300px;height:200px;" /></div>
+            </div>
+        </div>
+        }

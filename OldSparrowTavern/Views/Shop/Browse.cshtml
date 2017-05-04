@@ -1,0 +1,80 @@
+﻿@using OldSparrowTavern.ViewModels
+@model ShopViewModel
+@{
+    ViewBag.Title = "Shop";
+}
+<script>
+    function submitform() {
+        $('form').submit();
+    }
+</script>
+
+<div class="jumbotron" style="background-color:#222;border: 1px;
+border-color: #111; border-style:solid; height:860px">
+    <div class="col-sm-2">
+        <h2 style="color:gold;margin-left:-40px;">@Model.user.UserName </h2>
+        <h3 style="color:gold;margin-left:-40px;">Level: @Model.user.Level </h3>
+        <h3 style="color:gold;margin-left:-40px;">Experience: @Model.user.Experience / 1000 </h3>
+        <h3 style="color:gold;margin-left:-40px;">Coins: @Model.user.Gold <img src="~/Images/MenuElements/gold.png" width="35" height="35"></h3>
+        @{var invslots = 20 - @Model.user.Items.Count();
+        <h4 style="color:gold;margin-left:-40px;">Free inventory slots: @invslots / 20</h4>
+            }
+    </div>
+    <div class="col-sm-10">
+    <h3 id="shopHeader">Here you can shop consumables:</h3>
+    @using (Ajax.BeginForm("Browse", "Shop", new AjaxOptions { HttpMethod = "POST" }))
+    {
+        <select id="sortby" name="sortby" onchange="this.form.submit()">
+            <option selected disabled>Sort by:</option>
+            <option value="name">Name</option>
+            <option value="priceDescending">Cost &darr;</option>
+            <option value="priceAscending">Cost &uarr;</option>
+        </select>
+    }
+    </div>
+    <table>
+        <thead style="display: block;border: 1px solid green; ">
+            <tr>
+                <th style="color:gold;width:150px;font-size:large">Product name</th>
+                <th style="color:gold;width:180px;font-size:large;text-align:right;">Description</th>
+                <th style="color:gold;width:190px;font-size:large;text-align:right">Experience gain</th>
+                <th style="color:gold;width:83px;font-size:large;text-align:right">Cost</th>
+            </tr>
+        </thead>
+        <tbody style="display: block;margin-top:20px; border: 1px solid green; width:800px;height: 700px; overflow-y: scroll">
+            @foreach (var item in Model.items)
+            {
+                <tr class="shoptr">
+                    <td style="color:gold;width:120px;font-size:medium">@item.Name</td>
+                    <td><img src="@item.PictureURL" style="width:100px; height:150px;"></td>
+                    <td style="color:gold;width:120px;font-size:small;text-align:right;margin-left:25px;">@item.Description</td>
+                    <td style="color:gold;width:120px;font-size:x-large;text-align:right;">@item.ExperienceGain</td>
+                    <td style="color:gold;width:120px;font-size:x-large;text-align:right;left:33px;">@item.Cost <img src="~/Images/MenuElements/gold.png" width="35" height="35"></td>
+                    @if (Model.user.Gold < item.Cost)
+                    {
+                        <td style="width:120px;font-size:x-large;text-align:right;left:33px;" title="Not enough gold to purchase.">
+                            <button type="button" disabled >Buy</button>
+                        </td>
+                    }
+                    else if (@Model.user.Items.Count() == 20)
+                    {
+                        <td style="width:120px;font-size:x-large;text-align:right;left:33px;" title="Your inventory is full.">
+                            <button type="button" disabled >Buy</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="width:120px;font-size:x-large;text-align:right;left:33px;">
+                            @using (Ajax.BeginForm("Buy", "Shop", new AjaxOptions { HttpMethod = "POST" }))
+                            {
+                                <audio id="sound1" src="~/Images/Sounds/buyItemSound.mp3" preload="auto"></audio>
+                                <input type="hidden" value="@item.ItemId" name="ItemId" />
+                                <input class="btn-success" onclick="document.getElementById('sound1').play(); this.value = 'Buying..'; this.disabled = true;" type="submit" value="Buy">
+                            }
+                        </td>
+                    }
+                </tr>
+                }
+        </tbody>
+    </table>
+</div>
