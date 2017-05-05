@@ -1,0 +1,248 @@
+﻿body {
+    background-image: url('../Images/MenuElements/tavern.jpg');
+     background-repeat: no-repeat;
+    height:1200px;
+         background-size: 100% 100%;
+}
+@font-face{
+    font-family:metamorphous;
+    src:url(../fonts/Metamorphous-Regular.ttf);
+}
+#sortby{
+    float:right;
+    margin-bottom:-50px;
+    margin-top:-45px;
+    margin-right:34px;
+    width:100px;
+    height:30px;
+    font-size:medium;
+    background-color:transparent;
+    color:gold;
+
+}
+#disabledLinksBigger{
+   margin-bottom:2px;margin-left:23px;color:darkred;font-family:Diploma;font-size:260%;cursor: default;
+}
+#disabledLinks{
+   margin-bottom:2px; margin-left:23px;color:darkred;font-family:Diploma;font-size:240%;cursor: default;
+}
+#v-divider{
+ margin-left:105px;
+ margin-right:5px;
+ margin-top:-35px;
+ width:5px;
+ height:700px;
+ border-left:1px solid green;
+}
+#shopHeader{
+    margin-top:-20px;
+    margin-bottom:20px;
+    color:gold;
+    text-align:center;
+}
+#inventoryLayout {
+  width: 500px;
+  height: 600px;
+}
+.occupiedslot {
+    position: relative;
+}
+.popup {
+    position: absolute;
+    width:300px;
+    display: none; /* keeps the popup hidden if no JS available */
+    background-color:black;
+    z-index: 1000;
+    border:2px solid green;
+}
+#itemName,#itemDescription,#expGain{
+    color:gold;
+    margin-left:3px;
+    margin-right:3px;
+    text-align:center;
+}
+.shoptr{
+     border-bottom: 1px solid green;
+     padding-bottom:5px;
+     padding-top:5px;
+    width:800px;
+ }
+#plakat{
+    padding-top:10px;
+    font-family:metamorphous;
+    background-color:#222;
+    border: 1px;
+    border-color: #111;
+    border-style:solid; 
+    height:900px
+}
+.popup>form{
+     margin-left:90px;
+     padding-bottom:5px;
+}
+#shopTable{
+  width: 500px;
+  height: 600px;
+  overflow:scroll;
+}
+td {
+  width: 100px;
+  height:150px;
+  position: relative;
+
+}
+td:after {
+  content: '';
+  display:  block;
+}
+td .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, .4);
+}
+#avatars {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.avatarFrame {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top:-55px;
+  margin-bottom:-5px;
+  margin-left:-55px;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#changeAvatar {
+    margin-left:48px;
+    border:solid;
+    text-decoration: none;
+    background-color: gray;
+    color: black;
+    padding: 2px 6px 2px 6px;
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
+    font-size: 1.25em;
+    font-weight: 700;
+    height:50px;
+    width:250px;
+    display: inline-block;
+}
+#changeAvatar:hover{
+     background-color: gold;
+}
+.inputfile + label {
+    margin-left:48px;
+    margin-bottom:2px;
+    border:solid;
+    text-decoration:none;
+    background-color: gray;
+    color: black;
+    padding: 2px 6px 2px 6px;
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
+    font-size: 1.25em;
+    font-weight: 700;
+    height:40px;
+    width:250px;
+    text-align:center;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: gold;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+	pointer-events: none;
+}
+.avatar {
+  position: absolute;
+  top: 102px;
+  left: 64px;
+  width:252px;
+  height:372px;
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:15px;
+  border-top-left-radius:120px;
+  border-top-right-radius:120px;
+  margin-top:-37px;
+}
+#experience{
+    margin-left:555px;
+    margin-bottom:-5px;
+    margin-top:-58px;
+}
+#experienceText{
+    margin-left:23px;
+}
+#progress{
+margin-right:28px;
+}
+#name{
+    margin-bottom:-5px;
+    margin-top:-50px;
+    left:100px;
+}
+#level{
+    margin-left:50px;
+    margin-bottom:-5px;
+    margin-top:-50px;
+}
+#map {
+height: 100%;
+}
+@font-face {
+   font-family: Diploma; 
+   src: url('../fonts/diploma.ttf');
+} 
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+ .navbar.transparent.navbar-inverse .navbar-inner {
+    border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+}

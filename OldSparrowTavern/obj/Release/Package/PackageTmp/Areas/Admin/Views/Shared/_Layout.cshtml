@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @using OldSparrowTavern.HelperMethods
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    @{
+        //Store the Controller and Action in the format : "Controller/Action" so it can easily be checked
+        string ctrName = String.Format("{0}/{1}", ViewContext.RouteData.Values["controller"], ViewContext.RouteData.Values["action"]);
+    }
+</head>
+<body>
+    <div class="navbar transparent navbar-inverse">
+        <div class="container">
+            <div class="navbar-inner">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src='@Url.Content("~/Images/MenuElements/Logo.png")' />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @if (ctrName == "ManageUsers/Users")
+                        {
+                            @Html.ActionLink("Users", "Users", "ManageUsers", new { Area = "Admin" }, new { @style = "color:darkred;font-family:Diploma;font-size:240%;" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Users", "Users", "ManageUsers", new { Area = "Admin" }, new { @style = "color:gold;font-family:Diploma;font-size:240%;" })
+                        }
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="color:gold;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

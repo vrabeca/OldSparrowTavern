@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="oldsparrowtavern" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Tonko\\Desktop\\OldSparrowTavern\\OldSparrowTavern\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Tonko\\Desktop\\OldSparrowTavern\\OldSparrowTavern\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="OldSparrowTavernData-Web.config Connection String" description="" value="Data Source=tcp:oldsparrowntavern.database.windows.net,1433;Initial Catalog=tavernDatabase;User Id=vrabetsa@oldsparrowntavern.database.windows.net;Password=Dreamscape1992" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Tonko\\Desktop\\OldSparrowTavern\\OldSparrowTavern\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='OldSparrowTavernData']/@connectionString" />
+  </parameter>
+</parameters>

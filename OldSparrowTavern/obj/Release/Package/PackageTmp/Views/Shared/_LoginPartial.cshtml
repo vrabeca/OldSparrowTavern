@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    //Store the Controller and Action in the format : "Controller/Action" so it can easily be checked
+    string ctrName = String.Format("{0}/{1}", ViewContext.RouteData.Values["controller"], ViewContext.RouteData.Values["action"]);
+}
+@if (ctrName == "ChatRoom/Chat")
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <p id="disabledLinksBigger">Hello @User.Identity.GetUserName()!</p>
+        </li>
+        <li>
+            <p id="disabledLinksBigger">Log off</p>
+        </li>
+    </ul>
+}
+else
+{
+       if (Request.IsAuthenticated)
+       {
+           using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+           {
+            @Html.AntiForgeryToken()
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    @if (ctrName == "Account/Register")
+                    {
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:darkred;font-family:Diploma;font-size:260%;" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:gold;font-family:Diploma;font-size:260%;" })
+                    }
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:gold;font-family:Diploma;font-size:240%;">Log off</a></li>
+            </ul>
+           }
+       }
+       else
+       {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @if (ctrName == "Account/Register")
+                {
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @style = "color:darkred;font-family:Diploma;font-size:260%;" })
+                }
+                else
+                {
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @style = "color:gold;font-family:Diploma;font-size:260%;" })
+                }
+            </li>
+            <li>
+                @if (ctrName == "Account/Login")
+                {
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "color:darkred;font-family:Diploma;font-size:260%;" })
+                }
+                else
+                {
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "color:gold;font-family:Diploma;font-size:260%;" })
+                }
+            </li>
+        </ul>
+       }
+}
+

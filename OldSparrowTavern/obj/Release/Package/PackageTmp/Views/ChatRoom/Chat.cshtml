@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Chat Room";
+}
+@Styles.Render("~/Content/css/Chat.css")
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.1.min.js")
+    @Scripts.Render("/signalr/hubs")
+    <script type="text/javascript">
+         $(function () {
+             startChatHub();
+         });
+
+         function startChatHub() {
+             $('#nickname').val('@User.Identity.Name');
+             var chat = $.connection.chatHub;
+             chat.client.online = function (name) {
+                 var encodedName = $('<div />').text(name).html();
+
+                 if (name == $('#nickname').val())
+                     $('#onlineusers').append('<div class="border" style="color:green;font-family:metamorphous;">You: ' + encodedName + '</div>');
+                 else {
+                     $('#onlineusers').append('<div class="border"><input type="button" onclick="loadInfo(this)" id="loadUserInfo" value="' + name + '" /></div>')
+                     $("#users").append('<option value="' + name + '">' + encodedName + '</option>');
+                 }
+             };
+             chat.client.enters = function (name) {
+                 var encodedName = $('<div />').text(name).html();
+
+                 $('#chatlog').append('<div"><i style="color:Chartreuse;><i style="color:darkgreen;">@DateTime.Now.ToString() </i>' + encodedName + ' joined the conversation</i>');
+                 $("#users").append('<option value="' + name + '">' + encodedName + '</option>');
+
+                 $('#onlineusers').append('<div class="border"><input type="button" onclick="loadInfo(this)" id="loadUserInfo" value="' + name + '" /></div>');
+             };
+             // Create a function that the hub can call to broadcast chat messages.
+             chat.client.broadcastMessage = function (name, message) {
+                 var encodedName = $('<div />').text(name).html();
+                 var encodedMsg = $('<div />').text(message).html();
+                 playSound();
+                 $('#chatlog').append('<div class="border" style="color:green"><span style="color:Chartreuse"><i style="color:green;">@DateTime.Now.ToString() </i>' + encodedName + '</span>: ' + encodedMsg + '</div>');
+             };
+             chat.client.disconnected = function (name) {
+                 var encodedName = $('<div />').text(name).html();
+                 //Calls when someone leaves the page
+                 $('#chatlog').append('<div"><i style="color:green;">@DateTime.Now.ToString() </i>' + encodedName + ' left the chat</i></div>');
+                 $('#onlineusers div').remove(":contains('" + encodedName + "')");
+                 $("#users option").remove(":contains('" + encodedName + "')");
+
+             }
+             // Start the connection.
+             $.connection.hub.start().done(function () {
+                 //Calls the notify method of the server
+                 chat.server.notify($('#nickname').val(), $.connection.hub.id);
+                 $('#btnsend').click(function () {
+                     if ($("#users").val() == "All") {
+                         // Call the Send method on the hub.
+                         chat.server.send($('#nickname').val(), $('#message').val());
+                     }
+                     else
+                     {
+                         chat.server.sendToSpecific($('#nickname').val(), $('#message').val(), $("#users").val());
+                     }
+                     $('#message').val('').focus();
+                 });
+                 $('#btnleave').click(function () {
+                     $.connection.hub.stop();
+                     chat.client.disconnected(name);
+                     window.location.href = "/Home/Index";
+                 });
+             });
+         }
+
+        function loadInfo(ele) {
+            var val = ele.value;
+            $.ajax({
+                url: '@Url.Action("UserInfo","ChatRoom")',
+                type: "GET",
+                data: { username: val }
+            })
+            .done(function (partialViewResult) {
+                $("#userinfo").html(partialViewResult);
+            });
+        };
+        function playSound() {
+            var sound = document.getElementById("audio");
+            sound.play();
+        }
+</script>
+}
+<h2 id="chatroomlabel">Chat Room</h2>
+<audio id="audio" src="~/Images/Sounds/message.mp3" autostart="false"></audio>
+    <div id="container" class="jumbotron">
+        <div class="row">
+            <div class="col-lg-7">
+                <input type="hidden" id="nickname" />
+                <div id="chatlog"></div>
+                <div id="onlineusers">
+                    <b>Online Users</b>
+                </div>
+                <div id="chatarea">
+                    <div class="messagelog">
+                        <textarea spellcheck="true" id="message" class="messagebox"></textarea>
+                    </div>
+                    <div class="actionpane">
+                        <input type="button" class="btn btn-success btn-lg" id="btnsend" value="Send" />
+                    </div>
+                    <div class="actionpane">
+                        <select id="users">
+                            <option value="All">All</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-danger btn-lg" id="btnleave" value="Leave chat" />
+            </div>
+            <div class="col-lg-5">
+                <div id="userinfo"></div>
+            </div>
+        </div>
+    </div>
+
+
+
