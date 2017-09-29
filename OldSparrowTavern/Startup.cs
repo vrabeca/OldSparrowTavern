@@ -16,6 +16,20 @@ namespace OldSparrowTavern
         {
             app.MapSignalR();
             ConfigureAuth(app);
+            createRolesandUsers();
+        }
+        private void createRolesandUsers()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<User>(new UserStore<User>(context));
+            
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "User";
+                roleManager.Create(role);
+
+            
         }
     }
 }

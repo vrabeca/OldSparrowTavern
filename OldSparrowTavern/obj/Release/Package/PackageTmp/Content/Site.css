@@ -46,6 +46,18 @@
 }
 .occupiedslot {
     position: relative;
+    border:2px solid green;
+    margin-top:-1px;
+            margin-bottom:-1px;
+
+}
+.emptySlot {
+    position: relative;
+    border:2px solid green;
+        margin-top:-1px;
+                    margin-bottom:-1px;
+
+
 }
 .popup {
     position: absolute;

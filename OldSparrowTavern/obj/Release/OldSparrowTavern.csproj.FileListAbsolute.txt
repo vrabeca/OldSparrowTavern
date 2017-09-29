@@ -131,3 +131,6 @@ C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Id
 C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.csprojResolveAssemblyReference.cache
 C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.dll
 C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.pdb
+C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.csproj.CoreCompileInputs.cache
+C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.Migrations.a.resources
+C:\Users\Tonko\Desktop\OldSparrowTavern\OldSparrowTavern\obj\Release\OldSparrowTavern.csproj.GenerateResource.Cache

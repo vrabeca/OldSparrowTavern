@@ -15,6 +15,7 @@ namespace OldSparrowTavern.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
+
         }
     }
 }
