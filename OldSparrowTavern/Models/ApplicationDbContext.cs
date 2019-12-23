@@ -10,7 +10,7 @@ namespace OldSparrowTavern.Models
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
-            : base("OldSparrowTavernData", throwIfV1Schema: false)
+            : base("OldSparrowTavernDb", throwIfV1Schema: false)
         {
         }
         public virtual IDbSet<Item> Items { get; set; }

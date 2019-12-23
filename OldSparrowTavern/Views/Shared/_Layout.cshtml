@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @using OldSparrowTavern.HelperMethods
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/chat.css" rel="stylesheet" />
@@ -119,6 +120,42 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <h3 id="shopHeader">Here you can convert values:</h3>
+        @using (Ajax.BeginForm("Index", "Home",
+                       new AjaxOptions { UpdateTargetId = "divInterestDeatils" }))
+        {
+
+        <ul>
+            <li>
+                <div id="Amount" style="color:goldenrod;font-size:20px">Amount</div>
+                @Html.TextBox("txtAmount")
+            </li>
+            <li>
+                <select id="from" name="from">
+                    <option selected disabled>From</option>
+                    <option value="eur">eur</option>
+                    <option value="usd">usd</option>
+                    <option value="bgn">bgn</option>
+                </select>
+            </li>
+            <li>
+                <select id="to" name="to">
+                    <option selected disabled>To</option>
+                    <option value="eur">eur</option>
+                    <option value="usd">usd</option>
+                    <option value="bgn">bgn</option>
+                </select>
+            </li>
+            <li>
+                <input class="btn-lg btn-success" type="submit" value="Calculate" onclick="this.form.submit(); document.getElementById('sound2').play(); this.value = 'Calculating..'; this.disabled = true;" />
+
+            </li>
+            <li>
+                <div id="divInterestDeatils" this.name="Viewbag.finalCurrency" style="color:goldenrod;font-size:16px">@TempData["finalCurrency"]</div>
+            </li>
+            @Html.Hidden("returnUrl", this.Request.RawUrl)
+        </ul>
+        }
         <footer>
             <p style="color:gold;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
