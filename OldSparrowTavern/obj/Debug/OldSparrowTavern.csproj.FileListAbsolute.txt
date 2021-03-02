@@ -452,6 +452,7 @@ D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.ApplicationInsights.d
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.Core.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Client.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Core.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -492,7 +493,11 @@ D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.ApplicationInsights.x
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.Core.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Client.pdb
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Client.xml
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Core.pdb
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\Microsoft.Owin.xml
@@ -516,10 +521,10 @@ D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\System.Web.WebPages.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\System.Web.WebPages.Deployment.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\System.Web.WebPages.Razor.xml
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\bin\System.Web.Optimization.xml
-D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.csprojAssemblyReference.cache
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.Migrations.a.resources
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.csproj.GenerateResource.cache
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.csproj.CoreCompileInputs.cache
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.csproj.CopyComplete
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.dll
 D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.pdb
+D:\tonkich\OldSparrowTavern\OldSparrowTavern\obj\Debug\OldSparrowTavern.csprojAssemblyReference.cache

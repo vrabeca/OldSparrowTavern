@@ -24,14 +24,13 @@ namespace OldSparrowTavern.Controllers
             ShopViewModel svm = new ShopViewModel() { user = user, items = items.DistinctBy(i => i.Name).ToList() };
             return View(svm);
         }
-        [HttpPost]
-        public ActionResult Browse(string order)
+        public ActionResult BrowsePartial(string order)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var users = db.Users.ToList();
             User user = users.Find(u => u.UserName == User.Identity.Name);
             var items = db.Items.ToList();
-            switch (Request.Form["sortby"])
+            switch (order)
             {
                 case "priceDescending":
                     items = items.OrderByDescending(s => s.Cost).ToList();
@@ -46,8 +45,9 @@ namespace OldSparrowTavern.Controllers
                     break;
             }
             ShopViewModel svm = new ShopViewModel() { user = user, items = items };
-            return View(svm);
+            return PartialView(order,svm);
         }
+        
         [HttpPost]
         public void Buy(int itemId)
         {

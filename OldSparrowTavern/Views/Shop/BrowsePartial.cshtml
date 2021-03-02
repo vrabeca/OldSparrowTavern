@@ -1,0 +1,44 @@
+﻿@using OldSparrowTavern.ViewModels
+@model ShopViewModel
+@{
+    ViewBag.Title = "Shop";
+
+}
+
+@Styles.Render("~/Content/Chat.css")
+@Styles.Render("~/Content/chatPartial.css")
+
+
+@foreach (var item in Model.items)
+{
+    <tr id="shoptr" class="shoptr">
+        <td style="color:gold;width:120px;font-size:medium">@item.Name</td>
+        <td><img src="@item.PictureURL" style="width:100px; height:150px;"></td>
+        <td style="color:gold;width:120px;font-size:small;text-align:right;margin-left:25px;">@item.Description</td>
+        <td style="color:gold;width:120px;font-size:x-large;text-align:right;">@item.ExperienceGain</td>
+        <td style="color:gold;width:120px;font-size:x-large;text-align:right;left:33px;">@item.Cost <img src="~/Images/MenuElements/gold.png" width="35" height="35"></td>
+        @if (Model.user.Gold < item.Cost)
+        {
+            <td style="width:120px;font-size:x-large;text-align:right;left:33px;" title="Not enough gold to purchase.">
+                <button type="button" disabled>Buy</button>
+            </td>
+        }
+        else if (@Model.user.Items.Count() == 20)
+        {
+            <td style="width:120px;font-size:x-large;text-align:right;left:33px;" title="Your inventory is full.">
+                <button type="button" disabled>Buy</button>
+            </td>
+        }
+        else
+        {
+            <td style="width:120px;font-size:x-large;text-align:right;left:33px;">
+                @using (Ajax.BeginForm("Buy", "Shop", new AjaxOptions { HttpMethod = "POST" }))
+                {
+                    <audio id="sound1" src="~/Images/Sounds/buyItemSound.mp3" preload="auto"></audio>
+                    <input type="hidden" value="@item.ItemId" name="ItemId" />
+                    <input class="btn-success" onclick="document.getElementById('sound1').play(); this.value = 'Buying..'; this.disabled = true;" type="submit" value="Buy">
+                }
+            </td>
+        }
+    </tr>
+}

@@ -2,10 +2,10 @@
     ViewBag.Title = "Chat Room";
     ViewBag.finalCurrency = "";
 }
-@Styles.Render("~/Content/css/Chat.css")
+@Styles.Render("~/Content/Chat.css")
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
-    @Scripts.Render("~/Scripts/jquery.signalR-2.2.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.4.1.min.js")
     @Scripts.Render("/signalr/hubs")
     <script type="text/javascript">
          $(function () {
@@ -64,8 +64,12 @@
                      $('#message').val('').focus();
                  });
                  $('#btnleave').click(function () {
+                     //chat.server.notify($('#nickname').val(), $.connection.hub.id);
+
                      $.connection.hub.stop();
-                     chat.client.disconnected(name);
+
+                     chat.client.disconnected(name); 
+
                      window.location.href = "/Home/Index";
                  });
              });

@@ -8,6 +8,10 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
     <link href="~/Content/chat.css" rel="stylesheet" />
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     @{
@@ -161,7 +165,6 @@
         </footer>
     </div>f
 
-    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>
 </html>
